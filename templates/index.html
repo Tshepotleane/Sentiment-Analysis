@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Sentiment Scope</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+
+<body>
+
+
+<!-- ==========================================
+     NAVIGATION
+========================================== -->
+
+<nav class="navbar">
+
+    <div class="logo">
+        Sentiment <span>Scope</span>
+    </div>
+
+    <div class="nav-text">
+        AI-POWERED REVIEW ANALYSIS
+    </div>
+
+</nav>
+
+
+<main class="container">
+
+
+<!-- ==========================================
+     HERO
+========================================== -->
+
+<section class="hero">
+
+    <p class="eyebrow">
+        SENTIMENT ANALYSIS PLATFORM
+    </p>
+
+    <h1>
+        Understand what
+        customers are saying.
+    </h1>
+
+    <p class="hero-text">
+
+        Sentiment Scope analyzes customer reviews
+        and identifies whether the sentiment is
+        positive, neutral, or negative.
+
+    </p>
+
+</section>
+
+
+<!-- ==========================================
+     DASHBOARD STATISTICS
+========================================== -->
+
+<section class="stats-grid">
+
+
+    <div class="stat-card">
+
+        <p>Total Reviews</p>
+
+        <h2>
+            {{ statistics.total }}
+        </h2>
+
+    </div>
+
+
+    <div class="stat-card positive-card">
+
+        <p>Positive</p>
+
+        <h2>
+            {{ statistics.positive }}
+        </h2>
+
+    </div>
+
+
+    <div class="stat-card neutral-card">
+
+        <p>Neutral</p>
+
+        <h2>
+            {{ statistics.neutral }}
+        </h2>
+
+    </div>
+
+
+    <div class="stat-card negative-card">
+
+        <p>Negative</p>
+
+        <h2>
+            {{ statistics.negative }}
+        </h2>
+
+    </div>
+
+
+</section>
+
+
+<!-- ==========================================
+     ANALYZER
+========================================== -->
+
+<section class="section">
+
+    <div class="section-heading">
+
+        <p class="eyebrow">
+            REVIEW ANALYZER
+        </p>
+
+        <h2>
+            Analyze a customer review
+        </h2>
+
+        <p>
+            Enter a review and Sentiment Scope
+            will analyze its emotional tone.
+        </p>
+
+    </div>
+
+
+    <form
+        method="POST"
+        class="review-form"
+    >
+
+        <textarea
+            name="review"
+            placeholder="Example: I absolutely love this product!"
+            required
+        ></textarea>
+
+
+        <button type="submit">
+            Analyze Sentiment
+        </button>
+
+    </form>
+
+
+    {% if analyzed_review %}
+
+    <div class="result-card">
+
+        <p class="result-label">
+            ANALYSIS RESULT
+        </p>
+
+
+        <p class="review-text">
+            "{{ analyzed_review }}"
+        </p>
+
+
+        {% if analyzed_sentiment == "Positive" %}
+
+            <div class="sentiment positive">
+                POSITIVE
+            </div>
+
+        {% elif analyzed_sentiment == "Negative" %}
+
+            <div class="sentiment negative">
+                NEGATIVE
+            </div>
+
+        {% else %}
+
+            <div class="sentiment neutral">
+                NEUTRAL
+            </div>
+
+        {% endif %}
+
+
+        <div class="score-row">
+
+            <span>
+                Sentiment Score
+            </span>
+
+            <strong>
+                {{ "%.4f"|format(analyzed_score) }}
+            </strong>
+
+        </div>
+
+    </div>
+
+    {% endif %}
+
+</section>
+
+
+<!-- ==========================================
+     AVERAGE SCORE
+========================================== -->
+
+<section class="average-score">
+
+    <div>
+
+        <p class="eyebrow">
+            OVERALL SENTIMENT
+        </p>
+
+        <h2>
+            {{ statistics.average_score }}
+        </h2>
+
+        <p>
+            Average sentiment score across
+            the dataset.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- ==========================================
+     HOW IT WORKS
+========================================== -->
+
+<section class="section">
+
+    <div class="section-heading">
+
+        <p class="eyebrow">
+            PROCESS
+        </p>
+
+        <h2>
+            How Sentiment Scope works
+        </h2>
+
+    </div>
+
+
+    <div class="steps-grid">
+
+
+        <div class="step-card">
+
+            <span>01</span>
+
+            <h3>
+                Input
+            </h3>
+
+            <p>
+                A customer review is entered
+                into the application.
+            </p>
+
+        </div>
+
+
+        <div class="step-card">
+
+            <span>02</span>
+
+            <h3>
+                Analyze
+            </h3>
+
+            <p>
+                VADER analyzes the emotional
+                tone of the review.
+            </p>
+
+        </div>
+
+
+        <div class="step-card">
+
+            <span>03</span>
+
+            <h3>
+                Classify
+            </h3>
+
+            <p>
+                The review is classified as
+                positive, neutral, or negative.
+            </p>
+
+        </div>
+
+
+        <div class="step-card">
+
+            <span>04</span>
+
+            <h3>
+                Understand
+            </h3>
+
+            <p>
+                The result and sentiment score
+                are displayed to the user.
+            </p>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- ==========================================
+     REVIEWS
+========================================== -->
+
+<section class="section">
+
+    <div class="section-heading">
+
+        <p class="eyebrow">
+            DATASET
+        </p>
+
+        <h2>
+            Review Analysis
+        </h2>
+
+    </div>
+
+
+    <div class="table-container">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>Review</th>
+
+                    <th>Rating</th>
+
+                    <th>Sentiment</th>
+
+                    <th>Score</th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                {% for review in recent_reviews %}
+
+                <tr>
+
+                    <td>
+                        {{ review.review }}
+                    </td>
+
+                    <td>
+                        {{ review.rating }}/5
+                    </td>
+
+                    <td>
+
+                        {% if review.sentiment == "Positive" %}
+
+                            <span class="badge positive-badge">
+                                Positive
+                            </span>
+
+                        {% elif review.sentiment == "Negative" %}
+
+                            <span class="badge negative-badge">
+                                Negative
+                            </span>
+
+                        {% else %}
+
+                            <span class="badge neutral-badge">
+                                Neutral
+                            </span>
+
+                        {% endif %}
+
+                    </td>
+
+                    <td>
+                        {{ "%.4f"|format(review.score) }}
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
+
+</main>
+
+
+<!-- ==========================================
+     FOOTER
+========================================== -->
+
+<footer>
+
+    <p>
+        Sentiment Scope
+    </p>
+
+    <p>
+        Built with Python, Flask, Pandas & VADER
+    </p>
+
+</footer>
+
+
+</body>
+
+</html>

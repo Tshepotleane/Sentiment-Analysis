@@ -1,0 +1,726 @@
+/* ==========================================
+   RESET
+========================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* ==========================================
+   BODY
+========================================== */
+
+body {
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background: #f5f5f5;
+
+    color: #111;
+
+    line-height: 1.6;
+
+}
+
+
+/* ==========================================
+   NAVBAR
+========================================== */
+
+.navbar {
+
+    background: #111;
+
+    color: white;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding: 24px 7%;
+
+}
+
+
+.logo {
+
+    font-size: 25px;
+
+    font-weight: 800;
+
+}
+
+
+.logo span {
+
+    font-weight: 400;
+
+}
+
+
+.nav-text {
+
+    font-size: 12px;
+
+    letter-spacing: 2px;
+
+    color: #aaa;
+
+}
+
+
+/* ==========================================
+   CONTAINER
+========================================== */
+
+.container {
+
+    width: 86%;
+
+    max-width: 1200px;
+
+    margin: auto;
+
+}
+
+
+/* ==========================================
+   HERO
+========================================== */
+
+.hero {
+
+    padding: 90px 0 70px;
+
+}
+
+
+.eyebrow {
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    letter-spacing: 2px;
+
+    color: #777;
+
+    margin-bottom: 12px;
+
+}
+
+
+.hero h1 {
+
+    font-size:
+        clamp(45px, 7vw, 82px);
+
+    line-height: .95;
+
+    letter-spacing: -4px;
+
+    max-width: 850px;
+
+}
+
+
+.hero-text {
+
+    max-width: 650px;
+
+    margin-top: 28px;
+
+    color: #666;
+
+    font-size: 18px;
+
+}
+
+
+/* ==========================================
+   STATISTICS
+========================================== */
+
+.stats-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 16px;
+
+    margin-bottom: 90px;
+
+}
+
+
+.stat-card {
+
+    background: white;
+
+    padding: 30px;
+
+    border: 1px solid #ddd;
+
+    border-radius: 12px;
+
+}
+
+
+.stat-card p {
+
+    color: #777;
+
+    margin-bottom: 10px;
+
+}
+
+
+.stat-card h2 {
+
+    font-size: 45px;
+
+}
+
+
+.positive-card {
+
+    border-left: 5px solid #22c55e;
+
+}
+
+
+.neutral-card {
+
+    border-left: 5px solid #eab308;
+
+}
+
+
+.negative-card {
+
+    border-left: 5px solid #ef4444;
+
+}
+
+
+/* ==========================================
+   SECTIONS
+========================================== */
+
+.section {
+
+    margin-bottom: 100px;
+
+}
+
+
+.section-heading {
+
+    margin-bottom: 30px;
+
+}
+
+
+.section-heading h2 {
+
+    font-size: 42px;
+
+    letter-spacing: -2px;
+
+    line-height: 1;
+
+    margin-bottom: 12px;
+
+}
+
+
+.section-heading p:not(.eyebrow) {
+
+    color: #666;
+
+}
+
+
+/* ==========================================
+   REVIEW FORM
+========================================== */
+
+.review-form {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 16px;
+
+}
+
+
+textarea {
+
+    width: 100%;
+
+    min-height: 180px;
+
+    padding: 20px;
+
+    border: 1px solid #ccc;
+
+    border-radius: 12px;
+
+    font-family: inherit;
+
+    font-size: 16px;
+
+    resize: vertical;
+
+    outline: none;
+
+}
+
+
+textarea:focus {
+
+    border-color: #111;
+
+}
+
+
+button {
+
+    width: fit-content;
+
+    padding: 15px 28px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: #111;
+
+    color: white;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+}
+
+
+button:hover {
+
+    background: #333;
+
+}
+
+
+/* ==========================================
+   RESULT
+========================================== */
+
+.result-card {
+
+    background: white;
+
+    border: 1px solid #ddd;
+
+    border-radius: 14px;
+
+    padding: 35px;
+
+    margin-top: 30px;
+
+}
+
+
+.result-label {
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    letter-spacing: 2px;
+
+    color: #777;
+
+}
+
+
+.review-text {
+
+    font-size: 22px;
+
+    margin: 20px 0;
+
+}
+
+
+.sentiment {
+
+    display: inline-block;
+
+    padding: 8px 16px;
+
+    border-radius: 50px;
+
+    font-weight: 800;
+
+}
+
+
+.positive {
+
+    background: #dcfce7;
+
+    color: #166534;
+
+}
+
+
+.neutral {
+
+    background: #fef9c3;
+
+    color: #854d0e;
+
+}
+
+
+.negative {
+
+    background: #fee2e2;
+
+    color: #991b1b;
+
+}
+
+
+.score-row {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-top: 25px;
+
+    padding-top: 20px;
+
+    border-top: 1px solid #eee;
+
+}
+
+
+.score-row span {
+
+    color: #777;
+
+}
+
+
+.score-row strong {
+
+    font-size: 24px;
+
+}
+
+
+/* ==========================================
+   AVERAGE SCORE
+========================================== */
+
+.average-score {
+
+    background: #111;
+
+    color: white;
+
+    border-radius: 15px;
+
+    padding: 50px;
+
+    margin-bottom: 100px;
+
+}
+
+
+.average-score h2 {
+
+    font-size: 60px;
+
+}
+
+
+.average-score p {
+
+    color: #aaa;
+
+}
+
+
+/* ==========================================
+   STEPS
+========================================== */
+
+.steps-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 16px;
+
+}
+
+
+.step-card {
+
+    background: white;
+
+    padding: 30px;
+
+    border: 1px solid #ddd;
+
+    border-radius: 12px;
+
+}
+
+
+.step-card span {
+
+    color: #999;
+
+    font-weight: 800;
+
+}
+
+
+.step-card h3 {
+
+    margin: 20px 0 10px;
+
+    font-size: 22px;
+
+}
+
+
+.step-card p {
+
+    color: #666;
+
+    font-size: 14px;
+
+}
+
+
+/* ==========================================
+   TABLE
+========================================== */
+
+.table-container {
+
+    overflow-x: auto;
+
+    background: white;
+
+    border: 1px solid #ddd;
+
+    border-radius: 12px;
+
+}
+
+
+table {
+
+    width: 100%;
+
+    border-collapse: collapse;
+
+    min-width: 800px;
+
+}
+
+
+th,
+td {
+
+    text-align: left;
+
+    padding: 18px;
+
+    border-bottom: 1px solid #eee;
+
+}
+
+
+th {
+
+    background: #fafafa;
+
+    font-size: 12px;
+
+    text-transform: uppercase;
+
+    letter-spacing: 1px;
+
+    color: #666;
+
+}
+
+
+td {
+
+    font-size: 14px;
+
+}
+
+
+/* ==========================================
+   BADGES
+========================================== */
+
+.badge {
+
+    display: inline-block;
+
+    padding: 5px 10px;
+
+    border-radius: 50px;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+}
+
+
+.positive-badge {
+
+    background: #dcfce7;
+
+    color: #166534;
+
+}
+
+
+.neutral-badge {
+
+    background: #fef9c3;
+
+    color: #854d0e;
+
+}
+
+
+.negative-badge {
+
+    background: #fee2e2;
+
+    color: #991b1b;
+
+}
+
+
+/* ==========================================
+   FOOTER
+========================================== */
+
+footer {
+
+    background: #111;
+
+    color: #aaa;
+
+    text-align: center;
+
+    padding: 40px;
+
+}
+
+
+footer p:first-child {
+
+    color: white;
+
+    font-weight: 700;
+
+    margin-bottom: 5px;
+
+}
+
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media (max-width: 900px) {
+
+    .stats-grid,
+    .steps-grid {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .navbar {
+
+        padding: 20px;
+
+    }
+
+    .nav-text {
+
+        display: none;
+
+    }
+
+    .container {
+
+        width: 90%;
+
+    }
+
+    .hero {
+
+        padding: 60px 0;
+
+    }
+
+    .hero h1 {
+
+        letter-spacing: -2px;
+
+    }
+
+    .stats-grid,
+    .steps-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+    .section-heading h2 {
+
+        font-size: 32px;
+
+    }
+
+}
