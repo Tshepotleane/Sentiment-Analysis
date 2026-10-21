@@ -4,13 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>SentimentScope | Analytics Dashboard</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
 </head>
 
 <body>
 <div class="dashboard">
 
+    <!-- SIDEBAR -->
     <aside class="sidebar">
         <div class="brand">Sentiment<span>Scope.</span></div>
 
@@ -23,21 +27,34 @@
             <a href="#all-reviews">☷ &nbsp; All Reviews</a>
         </nav>
 
-        <div style="margin-top: 45px; padding: 14px; background: #202744; border-radius: 12px;">
-            <p style="font-weight: 700; margin-bottom: 5px;">Sentiment Engine</p>
-            <p style="font-size: 12px; color: #b6bdd5; margin: 0;">VADER · NLP Analysis</p>
+        <div class="engine-card"
+             style="margin-top:45px;padding:14px;background:#202744;border-radius:12px;">
+            <p style="font-weight:700;margin-bottom:5px;">
+                Sentiment Engine
+            </p>
+            <p style="font-size:12px;color:#b6bdd5;margin:0;">
+                VADER · NLP Analysis
+            </p>
         </div>
     </aside>
 
+    <!-- MAIN DASHBOARD -->
     <main class="main-content">
 
         <header class="topbar">
             <div>
-                <p class="muted" style="margin-bottom: 5px;">WORKSPACE / DASHBOARD</p>
+                <p class="muted" style="margin-bottom:5px;">
+                    WORKSPACE / DASHBOARD
+                </p>
                 <h1>Good insights start here.</h1>
-                <p class="muted">Understand customer feedback at a glance.</p>
+                <p class="muted">
+                    Understand customer feedback at a glance.
+                </p>
             </div>
-            <span class="sentiment positive">● SYSTEM OVERVIEW</span>
+
+            <span class="sentiment positive">
+                ● SYSTEM OVERVIEW
+            </span>
         </header>
 
         <!-- OVERVIEW -->
@@ -45,20 +62,25 @@
             <div class="section-header">
                 <div>
                     <h2>Overview</h2>
-                    <p class="muted">Your customer sentiment snapshot.</p>
+                    <p class="muted">
+                        Your customer sentiment snapshot.
+                    </p>
                 </div>
             </div>
 
             <div class="stats-grid">
+
                 <div class="stat-card">
                     <h3>Total Reviews</h3>
-                    <div class="value">{{ statistics.get('total', stats.get('total', 0)) }}</div>
+                    <div class="value">
+                        {{ statistics.get('total', stats.get('total', 0)) }}
+                    </div>
                     <p class="muted">Reviews analysed</p>
                 </div>
 
                 <div class="stat-card">
                     <h3>Positive Reviews</h3>
-                    <div class="value" style="color: #17a673;">
+                    <div class="value" style="color:#17a673;">
                         {{ statistics.get('positive', stats.get('positive', 0)) }}
                     </div>
                     <p class="muted">Positive sentiment</p>
@@ -66,7 +88,7 @@
 
                 <div class="stat-card">
                     <h3>Neutral Reviews</h3>
-                    <div class="value" style="color: #e9a23b;">
+                    <div class="value" style="color:#e9a23b;">
                         {{ statistics.get('neutral', stats.get('neutral', 0)) }}
                     </div>
                     <p class="muted">Neutral sentiment</p>
@@ -74,14 +96,16 @@
 
                 <div class="stat-card">
                     <h3>Negative Reviews</h3>
-                    <div class="value" style="color: #e45570;">
+                    <div class="value" style="color:#e45570;">
                         {{ statistics.get('negative', stats.get('negative', 0)) }}
                     </div>
                     <p class="muted">Negative sentiment</p>
                 </div>
+
             </div>
 
             <div class="charts-grid">
+
                 <div class="panel">
                     <div class="panel-header">
                         <h2>Sentiment Distribution</h2>
@@ -94,18 +118,23 @@
                         ('Neutral', 'neutral', '#e9a23b'),
                         ('Negative', 'negative', '#e45570')
                     ] %}
+
                         {% set count = statistics.get(key, stats.get(key, 0))|int %}
                         {% set percentage = (count * 100 / total) if total else 0 %}
 
-                        <div style="margin-bottom: 24px;">
-                            <div style="display: flex; justify-content: space-between; gap: 10px; margin-bottom: 8px;">
+                        <div style="margin-bottom:24px;">
+                            <div style="display:flex;justify-content:space-between;gap:10px;margin-bottom:8px;">
                                 <strong>{{ label }}</strong>
-                                <span class="muted">{{ count }} · {{ "%.1f"|format(percentage) }}%</span>
+                                <span class="muted">
+                                    {{ count }} · {{ "%.1f"|format(percentage) }}%
+                                </span>
                             </div>
-                            <div style="height: 9px; border-radius: 20px; background: #edf0f7; overflow: hidden;">
-                                <div style="width: {{ percentage }}%; height: 100%; background: {{ colour }}; border-radius: 20px;"></div>
+
+                            <div style="height:9px;border-radius:20px;background:#edf0f7;overflow:hidden;">
+                                <div style="width:{{ percentage }}%;height:100%;background:{{ colour }};border-radius:20px;"></div>
                             </div>
                         </div>
+
                     {% endfor %}
                 </div>
 
@@ -114,128 +143,182 @@
                         <h2>Average Sentiment Score</h2>
                     </div>
 
-                    <div style="padding: 15px 0;">
-                        <p class="muted">Compound score across your dataset</p>
-                        <div style="font-size: 44px; font-weight: 800; letter-spacing: -2px;">
+                    <div style="padding:15px 0;">
+                        <p class="muted">
+                            Compound score across your dataset
+                        </p>
+
+                        <div style="font-size:44px;font-weight:800;letter-spacing:-2px;">
                             {{ "%.4f"|format(statistics.get('average_score', stats.get('average_score', 0))|float) }}
                         </div>
-                        <p class="muted">VADER compound scores range from -1 to +1.</p>
+
+                        <p class="muted">
+                            VADER compound scores range from -1 to +1.
+                        </p>
                     </div>
                 </div>
+
             </div>
         </section>
 
         <!-- REVIEW ANALYZER -->
-        
-<!-- REVIEW ANALYZER -->
-<section id="analyzer">
-    <div class="section-header">
-        <div>
-            <h2>Review Analyzer</h2>
-            <p class="muted">
-                Analyse customer feedback using your VADER sentiment engine.
-            </p>
-        </div>
-    </div>
-
-    <div class="panel">
-        <form method="POST" action="#analyzer">
-            <div class="form-group">
-                <label for="review">Customer review</label>
-                <textarea
-                    id="review"
-                    name="review"
-                    placeholder="Example: I absolutely love this product. The quality is excellent!"
-                    required
-                >{{ analyzed_review or '' }}</textarea>
+        <section id="analyzer">
+            <div class="section-header">
+                <div>
+                    <h2>Review Analyzer</h2>
+                    <p class="muted">
+                        Analyse customer feedback using your VADER sentiment engine.
+                    </p>
+                </div>
             </div>
 
-            <button type="submit">✦ Analyze Sentiment</button>
-        </form>
+            <div class="panel">
+                <form method="POST" action="#analyzer">
+                    <div class="form-group">
+                        <label for="review">Customer review</label>
 
-        {% if error_message %}
-            <div class="alert alert-error" style="margin-top: 20px;">
-                {{ error_message }}
-            </div>
-        {% endif %}
+                        <textarea
+                            id="review"
+                            name="review"
+                            placeholder="Example: I absolutely love this product. The quality is excellent!"
+                            required
+                        >{{ analyzed_review or '' }}</textarea>
+                    </div>
 
-        {% if analyzed_review and analyzed_sentiment %}
-            <div style="margin-top: 28px; padding-top: 24px; border-top: 1px solid #e9ecf4;">
-                <p class="muted">ANALYSIS RESULT</p>
+                    <button type="submit">
+                        ✦ Analyze Sentiment
+                    </button>
+                </form>
 
-                <h3>Your review's sentiment</h3>
+                {% if error_message %}
+                    <div class="alert alert-error" style="margin-top:20px;">
+                        {{ error_message }}
+                    </div>
+                {% endif %}
 
-                <p>{{ analyzed_review }}</p>
+                {% if analyzed_review and analyzed_sentiment %}
+                    <div style="margin-top:28px;padding-top:24px;border-top:1px solid #e9ecf4;">
 
-                <span class="sentiment {{ analyzed_sentiment|lower }}">
-                    {{ analyzed_sentiment }}
-                </span>
+                        <p class="muted">ANALYSIS RESULT</p>
 
-                {% if analyzed_score is not none %}
-                    <div style="margin-top: 20px;">
-                        <p class="muted">VADER Compound Score</p>
+                        <h3>Your review's sentiment</h3>
 
-                        <div style="font-size: 32px; font-weight: 800;">
-                            {{ "%.4f"|format(analyzed_score|float) }}
-                        </div>
+                        <p>{{ analyzed_review }}</p>
 
-                        <p class="muted">
-                            Scores range from -1 (most negative)
-                            to +1 (most positive).
-                        </p>
+                        <span class="sentiment {{ analyzed_sentiment|lower }}">
+                            {{ analyzed_sentiment }}
+                        </span>
+
+                        {% if analyzed_score is not none %}
+                            <div style="margin-top:20px;">
+                                <p class="muted">VADER Compound Score</p>
+
+                                <div style="font-size:32px;font-weight:800;">
+                                    {{ "%.4f"|format(analyzed_score|float) }}
+                                </div>
+
+                                <p class="muted">
+                                    Scores range from -1 (most negative)
+                                    to +1 (most positive).
+                                </p>
+                            </div>
+                        {% endif %}
+
                     </div>
                 {% endif %}
             </div>
-        {% endif %}
-    </div>
-</section>
-
+        </section>
 
         <!-- ANALYTICS -->
-        
-<!-- ANALYTICS -->
-<section id="analytics">
-    <div class="section-header">
-        <div>
-            <h2>Analytics</h2>
-            <p class="muted">Explore sentiment patterns and customer ratings.</p>
-        </div>
-    </div>
+        <section id="analytics">
+            <div class="section-header">
+                <div>
+                    <h2>Analytics</h2>
+                    <p class="muted">
+                        Explore sentiment patterns and customer ratings.
+                    </p>
+                </div>
+            </div>
 
-    <div class="charts-grid">
-        <div class="panel">
-            <div class="panel-header">
-                <h2>Sentiment Distribution</h2>
-            </div>
-            <div style="height: 290px; position: relative;">
-                <canvas id="sentimentChart"></canvas>
-            </div>
-        </div>
+            <div class="charts-grid">
 
-        <div class="panel">
-            <div class="panel-header">
-                <h2>Customer Ratings</h2>
-            </div>
-            <div style="height: 290px; position: relative;">
-                <canvas id="ratingChart"></canvas>
-            </div>
-        </div>
-    </div>
-</section>
+                <div class="panel">
+                    <div class="panel-header">
+                        <h2>Sentiment Distribution</h2>
+                    </div>
 
+                    <div style="height:290px;position:relative;">
+                        <canvas id="sentimentChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-header">
+                        <h2>Customer Ratings</h2>
+                    </div>
+
+                    <div style="height:290px;position:relative;">
+                        <canvas id="ratingChart"></canvas>
+                    </div>
+                </div>
+
+            </div>
+        </section>
 
         <!-- ALL REVIEWS -->
         <section id="all-reviews">
             <div class="section-header">
                 <div>
                     <h2>All Reviews</h2>
-                    <p class="muted">Customer feedback and sentiment classifications.</p>
+                    <p class="muted">
+                        Search, filter and explore customer feedback.
+                    </p>
                 </div>
-                <span class="sentiment">{{ reviews|length }} records</span>
+
+                <span class="sentiment">
+                    {{ reviews|length }} records
+                </span>
             </div>
 
+            <!-- SEARCH AND FILTER -->
+            <div class="panel" style="margin-bottom:18px;">
+                <div class="charts-grid">
+
+                    <div class="form-group" style="margin-bottom:0;">
+                        <label for="reviewSearch">
+                            Search reviews
+                        </label>
+
+                        <input
+                            type="search"
+                            id="reviewSearch"
+                            placeholder="Search customer feedback..."
+                        >
+                    </div>
+
+                    <div class="form-group" style="margin-bottom:0;">
+                        <label for="sentimentFilter">
+                            Filter by sentiment
+                        </label>
+
+                        <select id="sentimentFilter">
+                            <option value="all">All sentiments</option>
+                            <option value="positive">Positive</option>
+                            <option value="neutral">Neutral</option>
+                            <option value="negative">Negative</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <p id="reviewCount" class="muted" style="margin:14px 0 0;">
+                    Loading reviews...
+                </p>
+            </div>
+
+            <!-- REVIEW TABLE -->
             <div class="table-wrapper">
-                <table>
+                <table id="reviewsTable">
                     <thead>
                         <tr>
                             <th>Customer Review</th>
@@ -246,76 +329,63 @@
                     </thead>
 
                     <tbody>
-                    {% for review in reviews %}
-                        <tr>
-                            <td>{{ review.get('review', '') }}</td>
-                            <td>{{ review.get('rating', '—') }} / 5</td>
-                            <td>
-                                {% set sentiment = review.get('sentiment', 'Neutral') %}
-                                <span class="sentiment {{ sentiment|lower }}">
-                                    {{ sentiment }}
-                                </span>
-                            </td>
-                            <td>
-                                {% if review.get('score') is not none %}
-                                    {{ "%.4f"|format(review.get('score')|float) }}
-                                {% else %}
-                                    —
-                                {% endif %}
-                            </td>
-                        </tr>
-                    {% else %}
-                        <tr>
-                            <td colspan="4" class="empty-state">
-                                No reviews are available yet.
-                            </td>
-                        </tr>
-                    {% endfor %}
+                        {% for review in reviews %}
+                            <tr>
+                                <td>{{ review.get('review', '') }}</td>
+
+                                <td>
+                                    {{ review.get('rating', '—') }} / 5
+                                </td>
+
+                                <td>
+                                    {% set sentiment = review.get('sentiment', 'Neutral') %}
+
+                                    <span class="sentiment {{ sentiment|lower }}">
+                                        {{ sentiment }}
+                                    </span>
+                                </td>
+
+                                <td>
+                                    {% if review.get('score') is not none %}
+                                        {{ "%.4f"|format(review.get('score')|float) }}
+                                    {% else %}
+                                        —
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="4" class="empty-state">
+                                    No reviews are available yet.
+                                </td>
+                            </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>
+
+            <p id="noFilteredReviews" class="empty-state" hidden>
+                No reviews match your search or selected sentiment.
+            </p>
+
         </section>
 
-        <footer style="padding: 25px 0; color: #858ba3;">
+        <!-- FOOTER -->
+        <footer style="padding:25px 0;color:#858ba3;">
             SentimentScope · Python · Flask · Pandas · VADER
         </footer>
 
     </main>
 </div>
 
-<div class="panel" style="margin-bottom: 18px;">
-    <div class="charts-grid">
-        <div class="form-group" style="margin-bottom: 0;">
-            <label for="reviewSearch">Search reviews</label>
-            <input
-                type="search"
-                id="reviewSearch"
-                placeholder="Search review text..."
-            >
-        </div>
-
-        <div class="form-group" style="margin-bottom: 0;">
-            <label for="sentimentFilter">Filter by sentiment</label>
-            <select id="sentimentFilter">
-                <option value="all">All sentiments</option>
-                <option value="positive">Positive</option>
-                <option value="neutral">Neutral</option>
-                <option value="negative">Negative</option>
-            </select>
-        </div>
-    </div>
-
-    <p id="reviewCount" class="muted" style="margin: 14px 0 0;">
-        Showing all reviews
-    </p>
-</div>
-
-
-
+<!-- CHART.JS -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-
 <script>
+    // =====================================
+    // CHART DATA FROM FLASK
+    // =====================================
+
     const sentimentLabels = ["Positive", "Neutral", "Negative"];
 
     const sentimentValues = [
@@ -324,7 +394,9 @@
         {{ statistics.get('negative', 0) | int }}
     ];
 
-    const ratingLabels = ["1 Star", "2 Stars", "3 Stars", "4 Stars", "5 Stars"];
+    const ratingLabels = [
+        "1 Star", "2 Stars", "3 Stars", "4 Stars", "5 Stars"
+    ];
 
     const ratingValues = [
         {{ rating_counts.get('1', 0) | int }},
@@ -333,6 +405,10 @@
         {{ rating_counts.get('4', 0) | int }},
         {{ rating_counts.get('5', 0) | int }}
     ];
+
+    // =====================================
+    // SENTIMENT DOUGHNUT CHART
+    // =====================================
 
     if (typeof Chart !== "undefined") {
         const sentimentCanvas = document.getElementById("sentimentChart");
@@ -345,7 +421,11 @@
                     labels: sentimentLabels,
                     datasets: [{
                         data: sentimentValues,
-                        backgroundColor: ["#17a673", "#e9a23b", "#e45570"],
+                        backgroundColor: [
+                            "#17a673",
+                            "#e9a23b",
+                            "#e45570"
+                        ],
                         borderWidth: 0,
                         hoverOffset: 10
                     }]
@@ -357,12 +437,19 @@
                     plugins: {
                         legend: {
                             position: "bottom",
-                            labels: { usePointStyle: true, padding: 20 }
+                            labels: {
+                                usePointStyle: true,
+                                padding: 20
+                            }
                         }
                     }
                 }
             });
         }
+
+        // =====================================
+        // CUSTOMER RATINGS BAR CHART
+        // =====================================
 
         if (ratingCanvas) {
             new Chart(ratingCanvas, {
@@ -372,7 +459,13 @@
                     datasets: [{
                         label: "Number of Reviews",
                         data: ratingValues,
-                        backgroundColor: ["#e45570", "#f08a72", "#e9a23b", "#7189f7", "#6558e8"],
+                        backgroundColor: [
+                            "#e45570",
+                            "#f08a72",
+                            "#e9a23b",
+                            "#7189f7",
+                            "#6558e8"
+                        ],
                         borderRadius: 7,
                         maxBarThickness: 48
                     }]
@@ -383,17 +476,21 @@
                     scales: {
                         y: {
                             beginAtZero: true,
-                            ticks: { precision: 0 }
+                            ticks: {
+                                precision: 0
+                            }
                         }
                     },
                     plugins: {
-                        legend: { display: false }
+                        legend: {
+                            display: false
+                        }
                     }
                 }
             });
         }
     }
-    
+
     // =====================================
     // ALL REVIEWS: SEARCH AND FILTER
     // =====================================
@@ -401,38 +498,45 @@
     const reviewSearch = document.getElementById("reviewSearch");
     const sentimentFilter = document.getElementById("sentimentFilter");
     const reviewCount = document.getElementById("reviewCount");
+    const reviewTable = document.querySelector("#reviewsTable tbody");
+    const noFilteredReviews = document.getElementById("noFilteredReviews");
 
-    const reviewTable = document.querySelector("#all-reviews tbody");
-
-    if (reviewSearch && sentimentFilter && reviewTable && reviewCount) {
+    if (
+        reviewSearch &&
+        sentimentFilter &&
+        reviewCount &&
+        reviewTable &&
+        noFilteredReviews
+    ) {
         const reviewRows = Array.from(reviewTable.querySelectorAll("tr"));
+
+        // Ignore the empty-state row when counting reviews.
+        const validRows = reviewRows.filter(
+            row => row.querySelectorAll("td").length >= 4
+        );
 
         function filterReviews() {
             const searchTerm = reviewSearch.value.trim().toLowerCase();
             const selectedSentiment = sentimentFilter.value;
 
             let visibleCount = 0;
-            let totalReviewRows = 0;
 
-            reviewRows.forEach((row) => {
+            validRows.forEach(row => {
                 const cells = row.querySelectorAll("td");
 
-                // Ignore the empty-state row.
-                if (cells.length < 4) {
-                    return;
-                }
-
-                totalReviewRows++;
-
                 const reviewText = cells[0].textContent.toLowerCase();
-                const sentimentText = cells[2].textContent.trim().toLowerCase();
+                const sentimentText =
+                    cells[2].textContent.trim().toLowerCase();
 
-                const matchesSearch = reviewText.includes(searchTerm);
+                const matchesSearch =
+                    reviewText.includes(searchTerm);
+
                 const matchesSentiment =
                     selectedSentiment === "all" ||
                     sentimentText === selectedSentiment;
 
-                const isVisible = matchesSearch && matchesSentiment;
+                const isVisible =
+                    matchesSearch && matchesSentiment;
 
                 row.style.display = isVisible ? "" : "none";
 
@@ -442,25 +546,19 @@
             });
 
             reviewCount.textContent =
-                `Showing ${visibleCount} of ${totalReviewRows} reviews`;
+                `Showing ${visibleCount} of ${validRows.length} reviews`;
 
-            let emptyMessage = document.getElementById("noFilteredReviews");
+            noFilteredReviews.hidden = visibleCount !== 0;
 
-            if (visibleCount === 0 && totalReviewRows > 0) {
-                if (!emptyMessage) {
-                    emptyMessage = document.createElement("p");
-                    emptyMessage.id = "noFilteredReviews";
-                    emptyMessage.className = "empty-state";
-                    emptyMessage.textContent =
-                        "No reviews match your search or filter.";
+            // Hide the original empty-state row when filtering
+            // returns no matching reviews.
+            const originalEmptyRow = reviewRows.find(
+                row => row.querySelectorAll("td").length < 4
+            );
 
-                    reviewTable.closest(".table-wrapper")
-                        .insertAdjacentElement("afterend", emptyMessage);
-                }
-
-                emptyMessage.style.display = "block";
-            } else if (emptyMessage) {
-                emptyMessage.style.display = "none";
+            if (originalEmptyRow) {
+                originalEmptyRow.style.display =
+                    validRows.length === 0 ? "" : "none";
             }
         }
 
@@ -469,10 +567,7 @@
 
         filterReviews();
     }
-
 </script>
-</body>
-
 
 </body>
 </html>
